@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linear_settings"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.mediary.customviews.CenteredToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal"
+        app:navigationIcon="@drawable/back_icon"
+        app:titleTextColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <com.mediary.customviews.CustomTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight=".7"
+            android:drawableLeft="@drawable/reminder"
+            android:drawablePadding="@dimen/_2sdp"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_10sdp"
+            android:text="Allow Reminders"
+            android:textSize="@dimen/_14ssp" />
+
+        <Switch
+            android:id="@+id/switchReminders"
+            android:layout_width="69dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight=".3"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_transparent" />
+
+
+    <com.mediary.customviews.CustomTextView
+        android:id="@+id/changeThemeColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:drawableLeft="@drawable/color_palette"
+        android:drawablePadding="@dimen/_2sdp"
+        android:gravity="center_vertical"
+        android:padding="@dimen/_10sdp"
+        android:text="Color Pallette"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_transparent" />
+
+    <com.mediary.customviews.CustomTextView
+        android:id="@+id/tvAppTour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:drawableLeft="@drawable/app_tour"
+        android:drawablePadding="@dimen/_3sdp"
+        android:gravity="center_vertical"
+        android:padding="@dimen/_10sdp"
+        android:text="App Tour"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_transparent" />
+
+    <com.mediary.customviews.CustomTextView
+        android:id="@+id/rateApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:drawableLeft="@drawable/rating"
+        android:drawablePadding="@dimen/_2sdp"
+        android:gravity="center_vertical"
+        android:padding="@dimen/_10sdp"
+        android:text="Rate Us"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_transparent" />
+
+    <com.mediary.customviews.CustomTextView
+        android:id="@+id/shareApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:drawableLeft="@drawable/share"
+        android:drawablePadding="@dimen/_2sdp"
+        android:gravity="center_vertical"
+        android:padding="@dimen/_10sdp"
+        android:text="Share App"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_transparent" />
+
+    <com.mediary.customviews.CustomTextView
+        android:id="@+id/tvOtherApps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:drawableLeft="@drawable/promotion"
+        android:drawablePadding="@dimen/_2sdp"
+        android:gravity="center_vertical"
+        android:padding="@dimen/_10sdp"
+        android:text="Other Apps"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp" />
+
+
+</LinearLayout>

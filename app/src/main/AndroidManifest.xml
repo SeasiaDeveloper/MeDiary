@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mediary">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.sensor.stepcounter"/>
+    <uses-feature android:name="android.hardware.sensor.stepdetector"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:name=".MeDiaryApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/new_app_icon"
+        android:label="@string/app_name"
+        android:hardwareAccelerated="false"
+        android:roundIcon="@mipmap/app_icon"
+        android:theme="@style/AppTheme"
+        android:largeHeap="true"
+        android:supportsRtl="true">
+        <activity android:name=".activities.SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+
+        <activity android:name=".activities.TutorialsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.dashboard.DashboardActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.answerstoquestions.QuestionAnswerActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.PromptLibraryActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.editquestions.EditQuestionActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.ImagesGridActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.ImageSliderActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.calenderview.CalendarActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.moodweather.MoodWeatherLogActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.questionswithanswersscreen.view.QuestionsWithAnswersActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.applock.PassCodeAppLockActivity" />
+        <activity android:name=".activities.applock.AuthenticationActivity" />
+        <activity android:name=".passcode.PasscodeViewActivity" />
+        <activity android:name=".activities.ColorChooseActivity" />
+
+        <activity android:name=".activities.settings.SettingsScreen" />
+
+        <meta-data android:name="com.samsung.android.health.permission.read"
+            android:value="com.samsung.health.exercise;com.samsung.health.step_count"/>
+        <meta-data android:name="com.samsung.android.health.permission.write"
+            android:value="com.samsung.health.exercise"/>
+       <!-- <meta-data
+            android:name="com.samsung.android.health.permission.read"
+            android:value="com.samsung.health.step_count" />-->
+
+        <receiver
+            android:name=".receiver.MyReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".receiver.DailyNotificationsIntentService"
+            android:exported="false" >
+        </service>
+        <service
+            android:name=".receiver.CheckRecentRun" >
+        </service>
+
+
+        <service android:name=".receiver.CheckAppStatusService" android:stopWithTask="false" />
+    </application>
+
+</manifest>

@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/layoutforprofileimage"
+                android:layout_width="100dp"
+                android:background="@color/black"
+                android:layout_height="100dp">
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/image"
+        android:layout_width="100dp"
+        android:padding="2dp"
+        android:background="@drawable/white_circulat_drawable"
+        android:layout_height="100dp"
+        android:text="@string/done"
+        android:gravity="center"
+        android:layout_margin="6dp"/>
+
+    <ImageView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:background="@drawable/arrow_right"
+        android:gravity="center"
+        android:minWidth="17sp"
+        android:adjustViewBounds="true"
+        android:minHeight="17sp"
+        android:paddingBottom="1dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:textColor="#ffffffff"
+        android:textSize="12sp"
+        android:visibility="visible"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+    />
+
+    </RelativeLayout>
+
+</LinearLayout>

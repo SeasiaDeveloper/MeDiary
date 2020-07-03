@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="default_cover">#80000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="colorPrimary">#ff5e62</color>
+</resources>

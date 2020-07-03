@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="color_set">
+        <item>#86CDF9</item>
+        <item>#018B8D</item>
+        <item>#81007F</item>
+        <item>#6395EC</item>
+        <item>#6B5ACD</item>
+        <item>#41DFD0</item>
+        <item>#A9A9A9</item>
+        <item>#FFFF01</item>
+        <item>#008001</item>
+        <item>#FE0000</item>
+        <item>#FD8C00</item>
+        <item>#800000</item>
+        <item>#D2681E</item>
+        <item>#010080</item>
+        <item>#ADFF30</item>
+        <item>#00FF7F</item>
+        <item>#FF4401</item>
+        <item>#FEA501</item>
+        <item>#FE1393</item>
+        <item>#FEB5C0</item>
+    </string-array>
+
+    <string-array name="mods">
+        <item>Gradual rainbow transition</item>
+        <item>Pulsating red</item>
+        <item>Pulsating green</item>
+        <item>Pulsating blue</item>
+        <item>Pulsating yellow</item>
+        <item>Pulsating cyan</item>
+        <item>Pulsating purple</item>
+        <item>Pulsating white</item>
+        <item>Pulsating red/green</item>
+        <item>Pulsating red/blue</item>
+        <item>Pulsating green/blue</item>
+        <item>Rainbow strobe</item>
+        <item>Red strobe</item>
+        <item>Green strobe</item>
+        <item>Blue strobe</item>
+        <item>Yellow strobe</item>
+        <item>Cyan strobe</item>
+        <item>Purple strobe</item>
+        <item>White strobe</item>
+        <item>Rapid rainbow transition</item>
+    </string-array>
+
+</resources>

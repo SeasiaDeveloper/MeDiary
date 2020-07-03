@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <com.mediary.customviews.CustomTextView
+        android:id="@+id/tvHeader"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="test question"
+        android:gravity="center_vertical"
+        android:background="#eef4f8"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:singleLine="false"
+        android:paddingStart="8dp"
+        android:textColor="@color/black"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/_8sdp">
+
+
+        <com.mediary.customviews.CustomTextView
+            android:id="@+id/tvPromptQuestion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:layout_weight=".8"
+            android:text="questions" />
+
+        <Switch
+            android:id="@+id/btnPrompt"
+            android:layout_width="69dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".2" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:background="@color/grey" />
+</LinearLayout>
+
+

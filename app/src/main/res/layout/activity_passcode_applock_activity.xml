@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/pinLockLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top|center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/_20sdp"
+    android:visibility="visible"
+    android:weightSum="2"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.kevalpatel.passcodeview.PinView
+        android:id="@+id/pin_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        app:dividerColor="@color/colorPrimaryDark"
+        app:fingerprintDefaultText="Scan your finger to unlock application"
+        app:fingerprintEnable="true"
+        app:fingerprintTextColor="@color/white"
+        app:fingerprintTextSize="24dp"
+        app:giveTactileFeedback="true"
+        app:pin_titleText="Enter Pin"
+        app:pin_titleTextColor="@color/white"
+        app:titleTextColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/tvEnterPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:gravity="right"
+        android:padding="@dimen/_10sdp"
+        android:text="Enter Password"
+        android:textAppearance="@android:style/TextAppearance.Small"
+        android:textColor="@color/grey"
+        android:visibility="visible"/>
+</LinearLayout>

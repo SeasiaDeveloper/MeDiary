@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ff5e62</color>
+    <color name="colorPrimaryDark">#ff5e62</color>
+    <color name="colorAccent">#ff5e62</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="grey">#949494</color>
+    <color name="add_device_bg">#FF69BA</color>
+    <color name="gray_transparent">#CCECECEC</color>
+    <color name="progress_bg">#C0BDDC</color>
+    <color name="green">#2AAA21</color>
+</resources>

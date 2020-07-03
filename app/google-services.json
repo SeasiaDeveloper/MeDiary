@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "148050522104",
+    "firebase_url": "https://mediary-3d5ae.firebaseio.com",
+    "project_id": "mediary-3d5ae",
+    "storage_bucket": "mediary-3d5ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148050522104:android:5eab898cea71d8b905b00d",
+        "android_client_info": {
+          "package_name": "com.mediary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "148050522104-lli5de5kktfufa7h8et8jr765lpgh5b3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKAma6tKX7nQ5hS9R6Y30fsZc2t4ZS9SA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "148050522104-lli5de5kktfufa7h8et8jr765lpgh5b3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

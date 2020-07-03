@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/calender"
+        android:icon="@drawable/calendar"
+        android:title="calender"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/pencil"
+        android:icon="@drawable/pencil"
+        android:title="pencil"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/questions"
+        android:icon="@drawable/questions"
+        android:title="questions"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/back"
+        android:icon="@drawable/back_arrow"
+        android:title="back"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/front"
+        android:icon="@drawable/front_arrow"
+        android:title="front"
+        app:showAsAction="ifRoom"/>
+
+</menu>
