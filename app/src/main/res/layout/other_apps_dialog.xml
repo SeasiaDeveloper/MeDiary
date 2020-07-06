@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/whitebg"
     android:orientation="vertical">
 
     <ImageView
@@ -13,15 +14,18 @@
 
     <LinearLayout
         android:id="@+id/lineareasyLedger"
-        android:padding="@dimen/_4sdp"
+        android:padding="@dimen/_8sdp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true">
 
         <ImageView
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:src="@drawable/easy_ledger"/>
+            android:src="@drawable/easy_ledger" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -59,6 +63,7 @@
         android:padding="@dimen/_8sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/_4sdp">
 
         <ImageView
@@ -96,6 +101,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:visibility="gone"
         android:background="@color/gray_transparent"/>
 
 
@@ -104,6 +110,9 @@
         android:id="@+id/lineardrWater"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_marginTop="@dimen/_4sdp">
 
         <ImageView
@@ -139,11 +148,13 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:visibility="gone"
         android:background="@color/gray_transparent"/>
 
     <LinearLayout
         android:padding="@dimen/_8sdp"
         android:id="@+id/linearAlarmCal"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_4sdp">

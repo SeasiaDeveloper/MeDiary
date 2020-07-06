@@ -15,7 +15,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Switch
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -50,6 +49,7 @@ import com.mediary.receiver.CheckRecentRun
 import com.mediary.receiver.MyReceiver
 import com.mediary.utils.*
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.activity_dashboard.dashboardRV
 import java.io.Serializable
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -59,13 +59,15 @@ import java.util.*
 class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGridItemClickListener,
     DashboardView, OnDeleteDailyDataClickListener, View.OnClickListener,
     OnCustomizeColorClickListener {
-    private var intent_from: String = ""
+    private lateinit var view: View
+    private var intent_action: Boolean = false
     private lateinit var questionsData: Questions
     private lateinit var imagesList: List<MeDairyImagesEntity>
     private var isAlertDialogClicked: Boolean = false
     private lateinit var currentDateNew: Date
     private val NOTIFICATION_REMINDER_NIGHT = 2
     private var item1: View? = null
+    private var item2: View? = null
     private var recyclerAdapter: DashboardGridAdapter? = null
     private var dateString: String = ""
     private var strDate: String = ""
@@ -98,7 +100,9 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
     private lateinit var target2: SimpleTarget
     private lateinit var target4: SimpleTarget
     private lateinit var target5: SimpleTarget
+    private lateinit var target6: SimpleTarget
     private lateinit var target3: SimpleTarget
+    private lateinit var target7: SimpleTarget
 
     override fun getLayout(): Int {
         return R.layout.activity_dashboard
@@ -268,12 +272,10 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
     }
 
     override fun setupUI() {
-       /* val extras = intent.getExtras()
-        if (extras != null) {
-            intent_from = extras.getString(Constants.INTENT_FROM)!!
-        }*/
-
-
+        /*   val extras = intent.getExtras()
+           if (extras != null) {
+               intent_action = extras.getBoolean(Constants.ACTION_APP_TOUR)
+           }*/
         var count = PreferenceHandler.readInteger(this, "AppOpenCount", 0)
         PreferenceHandler.writeInteger(this, "AppOpenCount", ++count)
 
@@ -307,55 +309,9 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
         insertedDate =
             Utilities.getFormattedDate(questionDate.insertedDate.time - DAY_IN_MILISECOND * 2)
         futureDate = Utilities.getFormattedDate(System.currentTimeMillis() + DAY_IN_MILISECOND * 2)
-        setDailyAlarm()
-        item1 = this.findViewById(R.id.smiley)
-        if ((PreferenceHandler.readInteger(this@DashboardActivity, PreferenceHandler.IS_FIRST_TIME, 0) < 4)) {
-            target1 = SimpleTarget.Builder(this)
-                .setTarget(item1!!)
-                .setHighlightRadius(10f)
-                .setDescription("First record the day's weather and mood.\n This will help you to remember. Swipe down to see reading mode.")
-                .setStartDelayMillis(500L)
-                .setTitle("")
-                .build()
-            countHint += 1
-            target3 = SimpleTarget.Builder(this)
-                .setDescription(DataBaseHelper.getHintList()[countHint])
-                .setTarget(returnHintView())
-                .setTitle("")
-                .setHighlightRadius(10f)
-                .build()
-            countHint += 1
-
-            target4 = SimpleTarget.Builder(this)
-                .setDescription(DataBaseHelper.getHintList()[countHint])
-                .setTarget(returnHintView())
-                .setHighlightRadius(10f)
-                .setTitle("")
-                .build()
-            countHint += 1
-            target5 = SimpleTarget.Builder(this)
-                .setDescription(DataBaseHelper.getHintList()[countHint])
-                .setTarget(returnHintView())
-                .setHighlightRadius(10f)
-                .setTitle("")
-                .build()
-
-            countHint += 1
-
-            PreferenceHandler.writeInteger(
-                this@DashboardActivity,
-                PreferenceHandler.IS_FIRST_TIME,
-                countHint
-            )
-
-            TargetInstructions.with(this@DashboardActivity)
-                .setTargets(arrayListOf(target1, target3, target4, target5))
-                .setFadeDuration(200L)
-                .setFadeInterpolator(LinearOutSlowInInterpolator())
-                .setOverlayColorResId(R.color.colorPrimary) // Background color
-                .start()
+        if (PreferenceHandler.readBoolean(this, PreferenceHandler.REMINDER_STATUS, false) == true) {
+            setDailyAlarm()
         }
-
         settings = getSharedPreferences(PREFS, MODE_PRIVATE)
         editor = settings?.edit()
         if (!settings!!.contains("lastRun"))
@@ -365,6 +321,16 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
         Log.v(TAG, "Starting CheckRecentRun service...")
         startService(Intent(this, CheckRecentRun::class.java))
     }
+
+/*
+    override fun onBackPressed() {
+        if (intent_action==false) {
+            super.onBackPressed()
+        } else {
+            intent_action = false
+        }
+    }
+*/
 
     private fun detectGesture() {
         centeredToolbar.setOnTouchListener(object : SwipeTouchListener(this@DashboardActivity) {
@@ -405,7 +371,7 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val alarmStartTime = Calendar.getInstance()
         val now = Calendar.getInstance()
-        alarmStartTime.set(Calendar.HOUR_OF_DAY, 6)
+        alarmStartTime.set(Calendar.HOUR_OF_DAY, 9)
         alarmStartTime.set(Calendar.MINUTE, 0)
         alarmStartTime.set(Calendar.SECOND, 0)
         if (now.after(alarmStartTime)) {
@@ -413,13 +379,10 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
         }
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
-            System.currentTimeMillis(),
-            1000 * 60,
+            alarmStartTime.timeInMillis, AlarmManager.INTERVAL_DAY,
             pendingIntent
         )
     }
-
-
 
     private fun addPromptQuestions() {
         dashboardPresenter.addPromptQuestions(DataBaseHelper.getQuestionsList(this))
@@ -437,9 +400,116 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
         startActivity(intent)
     }
 
+    override fun onItemsinflate(position: Int, itemView: View) {
+        view = itemView
+        addTargets()
+    }
+
     override fun showAddedAnswers(allQuestions: List<Questions>) {
         this.mQuestionAnswerList = allQuestions as MutableList<Questions>
         refreshContent()
+
+    }
+
+    private fun addTargets() {
+        item1 = this.findViewById(R.id.centeredToolbar)
+        item2 = this.findViewById(R.id.smiley)
+        if ((PreferenceHandler.readInteger(
+                this@DashboardActivity,
+                PreferenceHandler.IS_FIRST_TIME,
+                0
+            ) < 4)
+        ) {
+
+            target1 = SimpleTarget.Builder(this)
+                .setTarget(item1!!)
+                .setHighlightRadius(10f)
+                .setDescription(DataBaseHelper.getHintList()[countHint])
+                .setStartDelayMillis(500L)
+                .setTitle("")
+                .build()
+            countHint += 1
+            PreferenceHandler.writeInteger(
+                this@DashboardActivity,
+                PreferenceHandler.IS_FIRST_TIME,
+                countHint
+            )
+
+            target3 = SimpleTarget.Builder(this)
+                .setTarget(item2!!)
+                .setHighlightRadius(10f)
+                .setDescription(DataBaseHelper.getHintList()[countHint])
+                .setStartDelayMillis(500L)
+                .setTitle("")
+                .build()
+            countHint += 1
+            PreferenceHandler.writeInteger(
+                this@DashboardActivity,
+                PreferenceHandler.IS_FIRST_TIME,
+                countHint
+            )
+
+
+
+            target4 = SimpleTarget.Builder(this)
+                .setDescription(DataBaseHelper.getHintList()[countHint])
+                .setTarget(returnHintView())
+                .setTitle("")
+                .setHighlightRadius(10f)
+                .build()
+            countHint += 1
+            PreferenceHandler.writeInteger(
+                this@DashboardActivity,
+                PreferenceHandler.IS_FIRST_TIME,
+                countHint
+            )
+
+
+
+
+            target5 = SimpleTarget.Builder(this)
+                .setDescription(DataBaseHelper.getHintList()[countHint])
+                .setTarget(returnHintView())
+                .setTitle("")
+                .setHighlightRadius(10f)
+                .build()
+            countHint += 1
+            PreferenceHandler.writeInteger(
+                this@DashboardActivity,
+                PreferenceHandler.IS_FIRST_TIME,
+                countHint
+            )
+            target6 = SimpleTarget.Builder(this)
+                .setDescription(DataBaseHelper.getHintList()[countHint])
+                .setTarget(returnHintView())
+                .setHighlightRadius(10f)
+                .setTitle("")
+                .build()
+            countHint += 1
+            PreferenceHandler.writeInteger(
+                this@DashboardActivity,
+                PreferenceHandler.IS_FIRST_TIME,
+                countHint
+            )
+            target7 = SimpleTarget.Builder(this)
+                .setDescription(DataBaseHelper.getHintList()[countHint])
+                .setTarget(returnHintView())
+                .setHighlightRadius(10f)
+                .setTitle("")
+                .build()
+            countHint += 1
+            PreferenceHandler.writeInteger(
+                this@DashboardActivity,
+                PreferenceHandler.IS_FIRST_TIME,
+                countHint
+            )
+            TargetInstructions.with(this@DashboardActivity)
+                .setTargets(arrayListOf(target1, target3, target4, target5, target6, target7))
+                .setFadeDuration(200L)
+                .setFadeInterpolator(LinearOutSlowInInterpolator())
+                .setOverlayColorResId(R.color.colorPrimary) // Background color
+                .start()
+        }
     }
 
     private fun setTabLayout() {
@@ -471,34 +541,62 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
                 this@DashboardActivity,
                 PreferenceHandler.IS_FIRST_TIME,
                 countHint
-            ) < 4
+            ) <= 5
         ) {
             when {
                 PreferenceHandler.readInteger(
                     this@DashboardActivity,
                     PreferenceHandler.IS_FIRST_TIME,
                     countHint
-                ) == 0 -> {
-                    val layoutManager = GridLayoutManager(this@DashboardActivity, 2)
-                    dashboardRV.layoutManager = layoutManager
-                    layoutManager.findViewByPosition(3)
-                    viewHint = dashboardRV
+                ) == 1 -> {
+
+
+                    var childLayout = dashboardRV.layoutManager?.findViewByPosition(3)
+                    /* val layoutManager = GridLayoutManager(this@DashboardActivity, 2)
+                      dashboardRV.layoutManager = layoutManager
+                      var childLayout = layoutManager.findViewByPosition(3)*/
+                    viewHint = childLayout
                 }
                 PreferenceHandler.readInteger(
                     this@DashboardActivity,
                     PreferenceHandler.IS_FIRST_TIME,
                     countHint
-                ) == 1 -> viewHint = tabOne
+                ) == 2 -> {
+                 /*   var layoutManager = dashboardRV.getLayoutManager()
+                    var firstVisiblePosition = layoutManager?.findViewByPosition(1)*/
+                    // dashboardRV.getLayoutManager()?.findViewByPosition(3)
+                  /*  val layoutManager = GridLayoutManager(this@DashboardActivity, 2)
+                    dashboardRV.layoutManager = layoutManager*/
+
+                    viewHint = view
+
+                }
+
                 PreferenceHandler.readInteger(
                     this@DashboardActivity,
                     PreferenceHandler.IS_FIRST_TIME,
                     countHint
-                ) == 2 -> viewHint = tabTWo
+                ) == 3 -> viewHint = tabOne
+
+
                 PreferenceHandler.readInteger(
                     this@DashboardActivity,
                     PreferenceHandler.IS_FIRST_TIME,
                     countHint
-                ) == 3 -> viewHint = tabThree
+                ) == 4 -> viewHint = tabTWo
+
+                PreferenceHandler.readInteger(
+                    this@DashboardActivity,
+                    PreferenceHandler.IS_FIRST_TIME,
+                    countHint
+                ) == 5 -> viewHint = tabThree
+
+                /*    PreferenceHandler.readInteger(
+                         this@DashboardActivity,
+                         PreferenceHandler.IS_FIRST_TIME,
+                         countHint
+                     ) == 6 -> viewHint = tabThree
+     */
                 else -> viewHint = item1
             }
         }
@@ -512,7 +610,7 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
                         this@DashboardActivity,
                         PreferenceHandler.IS_FIRST_TIME,
                         countHint
-                    ) < 4
+                    ) < 5
                 ) {
                     showSuggestions(
                         returnHintView(),
@@ -539,7 +637,7 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
                         this@DashboardActivity,
                         PreferenceHandler.IS_FIRST_TIME,
                         countHint
-                    ) < 4
+                    ) < 5
                 ) {
                     showSuggestions(
                         returnHintView(),
@@ -566,7 +664,7 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
                         this@DashboardActivity,
                         PreferenceHandler.IS_FIRST_TIME,
                         countHint
-                    ) < 4
+                    ) < 5
                 ) {
                     showSuggestions(
                         returnHintView(),
@@ -594,7 +692,7 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
                         this@DashboardActivity,
                         PreferenceHandler.IS_FIRST_TIME,
                         countHint
-                    ) < 4
+                    ) < 5
                 ) {
                     showSuggestions(
                         returnHintView(),
@@ -624,7 +722,7 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
                         this@DashboardActivity,
                         PreferenceHandler.IS_FIRST_TIME,
                         countHint
-                    ) < 4
+                    ) < 5
                 ) {
                     showSuggestions(
                         returnHintView(),
@@ -664,7 +762,7 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
                         this@DashboardActivity,
                         PreferenceHandler.IS_FIRST_TIME,
                         countHint
-                    ) < 4
+                    ) < 5
                 ) {
                     showSuggestions(
                         returnHintView(),
@@ -912,11 +1010,14 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
                         this@DashboardActivity
                     )
                     dashboardRV.adapter = recyclerAdapter
+
+
                 } else {
                     recyclerAdapter!!.setList(mQuestionAnswerList)
                 }
             }
         }
+
     }
 
     override fun onColorChangeClick() {

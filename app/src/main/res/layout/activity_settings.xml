@@ -19,7 +19,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/_8sdp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
         android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/reminder" />
 
 
         <com.mediary.customviews.CustomTextView
@@ -27,19 +38,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight=".7"
-            android:drawableLeft="@drawable/reminder"
-            android:drawablePadding="@dimen/_2sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
             android:gravity="center_vertical"
-            android:padding="@dimen/_10sdp"
             android:text="Allow Reminders"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
             android:textSize="@dimen/_14ssp" />
 
         <Switch
             android:id="@+id/switchReminders"
             android:layout_width="69dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_3sdp"
             android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/_3sdp"
             android:layout_weight=".3"
             android:gravity="center" />
 
@@ -50,91 +62,171 @@
         android:layout_height="1dp"
         android:background="@color/gray_transparent" />
 
-
-    <com.mediary.customviews.CustomTextView
+    <LinearLayout
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
         android:id="@+id/changeThemeColor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:drawableLeft="@drawable/color_palette"
-        android:drawablePadding="@dimen/_2sdp"
-        android:gravity="center_vertical"
-        android:padding="@dimen/_10sdp"
-        android:text="Color Pallette"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_14ssp" />
+        android:orientation="horizontal"
+        android:padding="@dimen/_8sdp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/color_palette" />
+
+        <com.mediary.customviews.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:text="Color Pallette"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray_transparent" />
 
-    <com.mediary.customviews.CustomTextView
+    <LinearLayout
         android:id="@+id/tvAppTour"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:drawableLeft="@drawable/app_tour"
-        android:drawablePadding="@dimen/_3sdp"
-        android:gravity="center_vertical"
-        android:padding="@dimen/_10sdp"
-        android:text="App Tour"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_14ssp" />
+        android:orientation="horizontal"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/_8sdp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/app_tour" />
+
+        <com.mediary.customviews.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="App Tour"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray_transparent" />
 
-    <com.mediary.customviews.CustomTextView
+    <LinearLayout
         android:id="@+id/rateApp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:drawableLeft="@drawable/rating"
-        android:drawablePadding="@dimen/_2sdp"
-        android:gravity="center_vertical"
-        android:padding="@dimen/_10sdp"
-        android:text="Rate Us"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_14ssp" />
+        android:orientation="horizontal"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/_8sdp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/rating" />
+
+        <com.mediary.customviews.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="Rate Us"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray_transparent" />
 
-    <com.mediary.customviews.CustomTextView
+    <LinearLayout
         android:id="@+id/shareApp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:drawableLeft="@drawable/share"
-        android:drawablePadding="@dimen/_2sdp"
-        android:gravity="center_vertical"
-        android:padding="@dimen/_10sdp"
-        android:text="Share App"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_14ssp" />
+        android:padding="@dimen/_8sdp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/share" />
+
+        <com.mediary.customviews.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="Share App"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray_transparent" />
 
-    <com.mediary.customviews.CustomTextView
+    <LinearLayout
         android:id="@+id/tvOtherApps"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:drawableLeft="@drawable/promotion"
-        android:drawablePadding="@dimen/_2sdp"
-        android:gravity="center_vertical"
-        android:padding="@dimen/_10sdp"
-        android:text="Other Apps"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_14ssp" />
+        android:orientation="horizontal"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/_8sdp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/promotion" />
+
+        <com.mediary.customviews.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="Other Apps"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

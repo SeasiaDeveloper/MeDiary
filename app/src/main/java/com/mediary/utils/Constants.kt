@@ -9,6 +9,6 @@ object Constants {
     const val IMAGE_POSITION = "image_position"
     const val DISPLAYED_DATE = "displayedDate"
     const val DATESTRING = "dateString"
-    const val INTENT_FROM = "intent_from"
+    const val ACTION_APP_TOUR = "app_tour"
     var isColorButtonClicked:Boolean = false
 }

@@ -50,11 +50,13 @@ object DataBaseHelper {
     fun getHintList(): List<String> {
         return object : ArrayList<String>() {
             init {
+                add("Swipe down this view to see reading mode of current day diary.")
+                add("First record the day's weather and mood.\n This will help you to remember. Swipe down to see reading mode.")
                 add("Touch on the grid to get started writing.")
                 add("Want to see some other day diary.Click on this.")
                 add("Don't like some of the grid? No Problem! \n You are free to modify title or number of prompts.")
-                add("Prompt Library")
+                add("List of all prompts available.You can also add custom prompts")
             }
         }
     }
-}
+ }

@@ -37,6 +37,9 @@ class DashboardGridAdapter(
     }
 
     override fun onBindViewHolder(holder: GridViewHolder, position: Int) {
+        if (position==2) {
+            listener.onItemsinflate(position,holder.itemView)
+        }
         val questionsData = mDataList[position]
         holder.txtQuestions.text = questionsData.question
         holder.txtAnswers.text = questionsData.answers

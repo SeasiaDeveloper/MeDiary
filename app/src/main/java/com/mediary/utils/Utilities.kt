@@ -2,7 +2,9 @@ package com.mediary.utils
 
 import android.annotation.TargetApi
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Matrix
@@ -147,5 +149,29 @@ object Utilities {
         }
         return formattedDate
     }
+
+
+    fun openApp(context: Context,appPackageName : String) {
+        //var appPackageName = context.getPackageName(); // getPackageName() from Context or Activity object
+        try {
+            context.startActivity( Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)))
+        } catch (anfe : ActivityNotFoundException ) {
+            context.startActivity( Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)))
+        }
+    }
+    fun launchMarket(context: Context) {
+        var uri = Uri.parse("market://details?id=" + context.getPackageName());
+        var goToMarket =  Intent(Intent.ACTION_VIEW, uri)
+        // To count with Play market backstack, After pressing back button,
+        // to taken back to our application, we need to add following flags to intent.
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+        try {
+            context.startActivity(goToMarket);
+        } catch (e:ActivityNotFoundException) {
+            context.startActivity( Intent(Intent.ACTION_VIEW,
+                Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())))
+        }
+    }
+
 
 }

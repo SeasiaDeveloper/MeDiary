@@ -2,15 +2,12 @@ package com.mediary.activities.settings
 
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.net.Uri
 import android.view.View
 import android.widget.CompoundButton
-import android.widget.Toast
 import com.mediary.R
 import com.mediary.activities.ColorChooseActivity
 import com.mediary.activities.dashboard.DashboardActivity
@@ -19,8 +16,8 @@ import com.mediary.listeners.OnCustomizeColorClickListener
 import com.mediary.listeners.OnItemSelected
 import com.mediary.receiver.MyReceiver
 import com.mediary.utils.Alert
-import com.mediary.utils.Constants
 import com.mediary.utils.PreferenceHandler
+import com.mediary.utils.Utilities
 import kotlinx.android.synthetic.main.activity_settings.*
 import java.util.*
 
@@ -44,21 +41,22 @@ class SettingsScreen : BaseActivity(), View.OnClickListener, OnCustomizeColorCli
             onBackPressed()
         }
 
-        var reminderStatus = PreferenceHandler.readBoolean(this,PreferenceHandler.REMINDER_STATUS,true)
-        if (reminderStatus==true) {
-            switchReminders.isChecked=true
+        var reminderStatus =
+            PreferenceHandler.readBoolean(this, PreferenceHandler.REMINDER_STATUS, true)
+        if (reminderStatus == true) {
+            switchReminders.isChecked = true
         } else {
-            switchReminders.isChecked=false
+            switchReminders.isChecked = false
 
         }
 
         switchReminders.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 setDailyAlarm()
-                PreferenceHandler.writeBoolean(this,PreferenceHandler.REMINDER_STATUS,true)
+                PreferenceHandler.writeBoolean(this, PreferenceHandler.REMINDER_STATUS, true)
             } else {
-            cancelAlarm()
-                PreferenceHandler.writeBoolean(this,PreferenceHandler.REMINDER_STATUS,false)
+                cancelAlarm()
+                PreferenceHandler.writeBoolean(this, PreferenceHandler.REMINDER_STATUS, false)
             }
         })
         tvAppTour.setOnClickListener(this)
@@ -66,7 +64,7 @@ class SettingsScreen : BaseActivity(), View.OnClickListener, OnCustomizeColorCli
         shareApp.setOnClickListener(this)
         rateApp.setOnClickListener(this)
         tvOtherApps.setOnClickListener(this)
-     }
+    }
 
     override fun handleKeyboard(): View {
         return linear_settings
@@ -91,8 +89,7 @@ class SettingsScreen : BaseActivity(), View.OnClickListener, OnCustomizeColorCli
         }
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
-            System.currentTimeMillis(),
-            1000 * 60,
+            alarmStartTime.timeInMillis,AlarmManager.INTERVAL_DAY,
             pendingIntent
         )
     }
@@ -109,7 +106,6 @@ class SettingsScreen : BaseActivity(), View.OnClickListener, OnCustomizeColorCli
         var alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.cancel(pendingIntent);
     }
-
 
 
     override fun onResume() {
@@ -140,19 +136,20 @@ class SettingsScreen : BaseActivity(), View.OnClickListener, OnCustomizeColorCli
             }
 
             R.id.rateApp -> {
-                launchMarket()
+                Utilities.launchMarket(this)
             }
 
             R.id.changeThemeColor -> {
-            alerts.showCustomizeColorAlert(this)
-        }
+                alerts.showCustomizeColorAlert(this)
+            }
 
             R.id.tvAppTour -> {
                 isAppTourClicked = true
                 PreferenceHandler.writeInteger(this, PreferenceHandler.IS_FIRST_TIME, 0)
                 var mIntent = Intent(this, DashboardActivity::class.java)
-               // mIntent.putExtra(Constants.INTENT_FROM,"from_settings")
+                // mIntent.putExtra(Constants.ACTION_APP_TOUR,isAppTourClicked)
                 startActivity(mIntent)
+                finishAffinity()
             }
 
             R.id.tvOtherApps -> {
@@ -162,32 +159,18 @@ class SettingsScreen : BaseActivity(), View.OnClickListener, OnCustomizeColorCli
         }
     }
 
- /*   override fun onBackPressed() {
-        if (!isAppTourClicked){
-            super.onBackPressed()
-        } else {
-            finish()
-        }
-
-    }*/
-
-    private fun launchMarket() {
-        val uri: Uri = Uri.parse("market://details?id=$packageName")
-        val myAppLinkToMarket =
-            Intent(Intent.ACTION_VIEW, uri)
-        try {
-            startActivity(myAppLinkToMarket)
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, " unable to find market app", Toast.LENGTH_LONG).show()
-        }
-    }
-
     override fun onColorChangeClick() {
         startActivity(Intent(this, ColorChooseActivity::class.java))
 
     }
 
     override fun onItemClick(appname: String) {
+        if(appname.equals("EasyLedger",ignoreCase = true)) {
+            Utilities.openApp(this, "com.easyledger")
+        } else {
+            //change package name to Dr.Water
+            Utilities.openApp(this, "com.easyledger")
+        }
 
     }
- }
+}
