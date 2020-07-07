@@ -282,7 +282,6 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
         if (count != 0 && count % 5 == 0) {
             val alerts = Alert(this)
             alerts.showCustomizeColorAlert(this)
-            //startActivity(Intent(this,ColorChooseActivity::class.java))
         }
 
         dashboardPresenter = DashboardPresenterImpl(this, database!!, mQuestionAnswerList)

@@ -16,7 +16,6 @@ import com.mediary.base.BaseActivity
 import com.mediary.utils.Constants
 import com.mediary.utils.MyColor
 import com.mediary.utils.PreferenceHandler
-import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.fragment_color_chooser.*
 import kotlinx.android.synthetic.main.fragment_color_chooser.toolbar
 import top.defaults.colorpicker.*
@@ -48,12 +47,13 @@ class ColorChooseActivity
         switchOnOff!!.setOnCheckedChangeListener(this)
         colorWheelView = ColorWheelView(this)
         toolbar.title = getString(R.string.choose_color)
+        toolbar.setTitleTextColor(Color.WHITE)
+        toolbar.inflateMenu(R.menu.add_done_button)
         toolbar.inflateMenu(R.menu.add_done_button)
         toolbar.setOnMenuItemClickListener(this)
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
-
         picker = findViewById<View>(R.id.colorPicker) as ColorPickerView
         picker!!.setBrightnessSliderView(brightnessSliderView)
         picker!!.subscribe(this)
@@ -152,7 +152,7 @@ class ColorChooseActivity
     override fun onStaticColorSelected(selectedColor: Int) {
         tvSelectedColor!!.setBackgroundColor(selectedColor)
         saveColor(selectedColor)
-        mListener?.onColorSelected(MyColor(selectedColor, 0.toByte(), mProgress))
+         mListener?.onColorSelected(MyColor(selectedColor, 0.toByte(), mProgress))
         PreferenceHandler.writeInteger(this, PreferenceHandler.COLOR_SELECTION, selectedColor)
 
     }
@@ -275,6 +275,7 @@ class ColorChooseActivity
             }
         }
     }
+
     override fun onMenuItemClick(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.btnDone) {
             val colorSelected =

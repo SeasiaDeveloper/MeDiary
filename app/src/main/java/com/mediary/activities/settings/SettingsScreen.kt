@@ -22,8 +22,7 @@ import kotlinx.android.synthetic.main.activity_settings.*
 import java.util.*
 
 
-class SettingsScreen : BaseActivity(), View.OnClickListener, OnCustomizeColorClickListener,
-    OnItemSelected {
+class SettingsScreen : BaseActivity(), View.OnClickListener, OnItemSelected {
 
     private val NOTIFICATION_REMINDER_NIGHT = 2
     private lateinit var alerts: Alert
@@ -140,7 +139,7 @@ class SettingsScreen : BaseActivity(), View.OnClickListener, OnCustomizeColorCli
             }
 
             R.id.changeThemeColor -> {
-                alerts.showCustomizeColorAlert(this)
+                startActivity(Intent(this, ColorChooseActivity::class.java))
             }
 
             R.id.tvAppTour -> {
@@ -157,11 +156,6 @@ class SettingsScreen : BaseActivity(), View.OnClickListener, OnCustomizeColorCli
             }
 
         }
-    }
-
-    override fun onColorChangeClick() {
-        startActivity(Intent(this, ColorChooseActivity::class.java))
-
     }
 
     override fun onItemClick(appname: String) {
