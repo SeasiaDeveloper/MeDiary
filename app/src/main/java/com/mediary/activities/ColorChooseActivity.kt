@@ -49,7 +49,6 @@ class ColorChooseActivity
         toolbar.title = getString(R.string.choose_color)
         toolbar.setTitleTextColor(Color.WHITE)
         toolbar.inflateMenu(R.menu.add_done_button)
-        toolbar.inflateMenu(R.menu.add_done_button)
         toolbar.setOnMenuItemClickListener(this)
         toolbar.setNavigationOnClickListener {
             onBackPressed()

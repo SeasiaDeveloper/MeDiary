@@ -156,6 +156,7 @@ class DashboardActivity : BaseActivity(), Toolbar.OnMenuItemClickListener, OnGri
                     R.color.colorPrimary
                 ), PorterDuff.Mode.SRC_IN
             ))
+
         } else if (emoji == getString(R.string.neutral)) {
             menu?.getItem(1)?.icon = ContextCompat.getDrawable(this, R.drawable.neutral)
             menu?.getItem(1)?.icon?.colorFilter = (PorterDuffColorFilter(
